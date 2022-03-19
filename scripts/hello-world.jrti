@@ -1,0 +1,20 @@
+BLOCK start
+PRINT "Hello, world!"
+PRINT $__NEWLINE
+
+BLOCK ask_name
+PRINT "Please enter your name: "
+INPUT $name
+PRINT "Hello "
+PRINT $name
+PRINT $__NEWLINE
+
+BLOCK ask_continue
+PRINT "Would you like to continue: "
+INPUT $continue
+IF $continue == "y" GOTO ask_name
+GOTO end
+
+BLOCK end
+PRINT "Goodbye!"
+PRINT $__NEWLINE
