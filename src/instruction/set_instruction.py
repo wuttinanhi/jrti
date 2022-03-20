@@ -13,7 +13,10 @@ class SetInstruction(Instruction):
 
     def run(self):
         variable_storage = self.get_variable_storage()
-        variable_storage.set(self.__key, self.__value)
+        variable_storage.set(
+            self.__key,
+            self.__value.get(self.get_variable_storage())
+        )
 
     def __repr__(self) -> str:
         return f'<SetInstruction key={self.__key} value={self.__value}>'
