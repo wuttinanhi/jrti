@@ -31,7 +31,10 @@ class JRTI:
             current_instruction = self.__instructions[pointer]
             current_instruction.set_variable_storage(self.__variable_storage)
 
-            if isinstance(current_instruction, IfInstruction) or isinstance(current_instruction, GotoInstruction):
+            if (
+                isinstance(current_instruction, IfInstruction) or
+                isinstance(current_instruction, GotoInstruction)
+            ):
                 goto = current_instruction.get_goto(self.__goto_dict)
                 if goto is not None:
                     pointer = goto
