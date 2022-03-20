@@ -10,32 +10,36 @@ class IfInstruction(Instruction):
     def __init__(
         self,
         a: Value,
-        condition: str,
+        compare: str,
         b: Value,
         if_true_goto: str
     ) -> None:
         super().__init__()
         self.__a = a
-        self.__condition = condition
+        self.__compare = compare
         self.__b = b
         self.__true_goto = if_true_goto
 
     def eval(self):
         a = self.__a.get(self.get_variable_storage())
         b = self.__b.get(self.get_variable_storage())
+        compare = self.__compare
+        result: bool = False
 
-        if self.__condition == "==":
-            return a == b
-        if self.__condition == ">":
-            return a > b
-        if self.__condition == "<":
-            return a < b
-        if self.__condition == ">=":
-            return a >= b
-        if self.__condition == "<=":
-            return a <= b
-        if self.__condition == "!=":
-            return a != b
+        if compare == "==":
+            result = a == b
+        if compare == ">":
+            result = a > b
+        if compare == "<":
+            result = a < b
+        if compare == ">=":
+            result = a >= b
+        if compare == "<=":
+            result = a <= b
+        if compare == "!=":
+            result = a != b
+
+        return result
 
     def get_goto(self, goto_dict: Dict[str, int]):
         if self.eval() is False:
@@ -43,4 +47,4 @@ class IfInstruction(Instruction):
         return goto_dict.get(self.__true_goto)
 
     def __repr__(self) -> str:
-        return f'<IfInstruction a={self.__a} b={self.__b} condition={self.__condition} true={self.__true_goto}>'
+        return f'<IfInstruction a={self.__a} b={self.__b} compare={self.__compare} true_goto={self.__true_goto}>'
