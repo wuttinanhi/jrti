@@ -81,7 +81,7 @@ class Parser:
 
     def add_set_instruction(self, line: str):
         key = line.split(" ")[1]
-        value = Value(line.split(" to ")[1])
+        value = Value(line.split(" = ")[1])
         instruction = SetInstruction(key, value)
         self.__instructions.append(instruction)
 
@@ -118,10 +118,5 @@ class Parser:
         b: Value = Value(regex[4])
         if_true_goto: str = regex[5]
 
-        instruction = IfInstruction(
-            a,
-            condition,
-            b,
-            if_true_goto
-        )
+        instruction = IfInstruction(a, condition, b, if_true_goto)
         self.__instructions.append(instruction)
