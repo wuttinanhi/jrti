@@ -1,0 +1,18 @@
+SET $a = 1
+SET $b = 0
+
+IF $a == $b GOTO true
+GOTO false
+
+BLOCK true
+PRINT "true: "
+GOTO end
+
+BLOCK false
+PRINT "false: "
+GOTO end
+
+BLOCK end
+PRINT $a
+PRINT " == "
+PRINT $b

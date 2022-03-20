@@ -1,0 +1,11 @@
+# example: print 10 numbers with loop
+
+SET $i = 0
+
+BLOCK loop
+IF $i > 10 GOTO end
+PRINTLN $i
+MATH $i + 1
+GOTO loop
+
+BLOCK end

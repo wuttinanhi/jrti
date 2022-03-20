@@ -1,0 +1,5 @@
+SET $number = 123
+PRINTLN $number
+
+SET $string = "test 12345 hello"
+PRINTLN $string
