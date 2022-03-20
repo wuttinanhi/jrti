@@ -21,7 +21,7 @@ def parse_number(value: str):
 def parse_value(value: any):
     if str(value).startswith("$") is True:
         return Variable(value)
-    if str(value).startswith('"') is True:
+    if str(value).startswith('"') and str(value).endswith('"') is True:
         return str(value)[1:-1]
     if is_number(value) is True:
         return parse_number(value)
