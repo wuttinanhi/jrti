@@ -120,11 +120,11 @@ class Parser:
         regex = re.split(r'(IF)\s(.+)\s(\W\W|\W)\s(.+)\sGOTO\s(.+)', line)
 
         a: Value = Value(regex[2])
-        condition: str = regex[3]
+        compare: str = regex[3]
         b: Value = Value(regex[4])
         if_true_goto: str = regex[5]
 
-        instruction = IfInstruction(a, condition, b, if_true_goto)
+        instruction = IfInstruction(a, compare, b, if_true_goto)
         self.__instructions.append(instruction)
 
     def add_print_line_instruction(self, line: str):
