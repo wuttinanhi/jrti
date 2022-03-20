@@ -5,6 +5,7 @@ from typing import List
 
 
 from src.instruction.block_instruction import BlockInstruction
+from src.instruction.call_function_instruction import CallFunctionInstruction
 from src.instruction.goto_instruction import GotoInstruction
 from src.instruction.if_instruction import IfInstruction
 from src.instruction.instruction import Instruction
@@ -12,6 +13,7 @@ from src.instruction.math_instruction import MathInstruction
 from src.instruction.print_instruction import PrintInstruction
 from src.instruction.print_line_instruction import PrintLineInstruction
 from src.instruction.recieve_input_instruction import RecieveInputInstruction
+from src.instruction.return_instruction import ReturnInstruction
 from src.instruction.set_instruction import SetInstruction
 from src.value import Value
 
@@ -78,6 +80,14 @@ class Parser:
             if keyword == "PRINTLN":
                 self.add_print_line_instruction(line)
 
+            # call function instruction
+            if keyword == "CALLFN":
+                self.add_call_function_instruction(line)
+
+            # call return instruction
+            if keyword == "RETURN":
+                self.add_return_instruction(line)
+
         return self.__instructions
 
     def add_print_instruction(self, line: str):
@@ -130,4 +140,21 @@ class Parser:
     def add_print_line_instruction(self, line: str):
         value = Value(line[8:])
         instruction = PrintLineInstruction(value)
+        self.__instructions.append(instruction)
+
+    def add_call_function_instruction(self, line: str):
+        # CALLFN sum STORE $result
+        splitter = line.split(" ")
+
+        function_name = splitter[1]
+        store_key = splitter[3]
+
+        instruction = CallFunctionInstruction(function_name, store_key)
+        self.__instructions.append(instruction)
+
+    def add_return_instruction(self, line: str):
+        # RETURN $result
+        return_value = Value(line[7:])
+
+        instruction = ReturnInstruction(return_value)
         self.__instructions.append(instruction)

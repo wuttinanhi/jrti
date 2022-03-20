@@ -1,0 +1,32 @@
+# set function args
+SET $_a = "JRTI"
+
+# call function greet
+CALLFN greet STORE $__NULL
+
+# call function sum
+SET $_a = 1
+SET $_b = 2
+CALLFN sum STORE $result
+
+# print result
+PRINTLN $result
+
+# goto end
+GOTO end
+
+# function greet
+BLOCK greet
+PRINT "Hello "
+PRINT $_a
+PRINT $__NEWLINE
+RETURN 0
+
+# function sum
+BLOCK sum
+SET $_sum = $_a
+MATH $_sum + $_b
+RETURN $_sum
+
+# end
+BLOCK end
