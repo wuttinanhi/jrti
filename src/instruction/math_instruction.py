@@ -14,28 +14,20 @@ class MathInstruction(Instruction):
 
     def run(self):
         variable_storage = self.get_variable_storage()
-        original_value = variable_storage.get(self.__key)
+        first = variable_storage.get(self.__key)
+        second = self.__value.get(self.get_variable_storage())
 
         if self.__op == "+":
-            variable_storage.set(
-                self.__key, original_value +
-                self.__value.get(self.get_variable_storage())
-            )
+            result = first + second
         if self.__op == "-":
-            variable_storage.set(
-                self.__key, original_value -
-                self.__value.get(self.get_variable_storage())
-            )
+            result = first - second
         if self.__op == "*":
-            variable_storage.set(
-                self.__key, original_value *
-                self.__value.get(self.get_variable_storage())
-            )
+            result = first * second
         if self.__op == "/":
-            variable_storage.set(
-                self.__key, original_value /
-                self.__value.get(self.get_variable_storage())
-            )
+            result = first / second
+
+        parsed = Value(result).get(self.get_variable_storage())
+        variable_storage.set(self.__key, parsed)
 
     def __repr__(self) -> str:
-        return f'<AddInstruction key={self.__key} op={self.__op}>'
+        return f'<MathInstruction key={self.__key} op={self.__op} value={self.__value}>'
